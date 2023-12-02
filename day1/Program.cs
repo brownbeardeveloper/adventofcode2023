@@ -2,8 +2,7 @@ class Program
 {
     static void Main()
     {
-        StreamReader sr = new StreamReader
-            ("file.txt");
+        StreamReader sr = new StreamReader("file.txt");
 
         string line = sr.ReadLine();
         int sum = 0;
