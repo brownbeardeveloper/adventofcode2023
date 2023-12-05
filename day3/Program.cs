@@ -3,7 +3,7 @@ class Program
 {
     static void Main()
     {
-        string path = "C:\\Users\\brown\\OneDrive\\Desktop\\input-day3.txt";
+        string path = "file.txt";
         string content = File.ReadAllText(path);
         string[] lines = content.Split('\n');
 
