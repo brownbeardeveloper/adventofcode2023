@@ -3,7 +3,7 @@ class Program
 {
     static void Main()
     {
-        string path = "file.txt";
+        string path = "C:\\Users\\brown\\OneDrive\\Desktop\\input-day3.txt";
         string content = File.ReadAllText(path);
         string[] lines = content.Split('\n');
 
@@ -24,6 +24,11 @@ class Program
                     if (adjacent(lines, i, j))
                     {
                         keepNum = true;
+
+                        if (j >= 1 && lines[i][j - 1].ToString() == "-")
+                        {
+                            num = "-" + num;
+                        }
                         // Console.WriteLine($"Adjacent digit found at position ({i}, {j})");
                     }
                 }
@@ -55,6 +60,9 @@ class Program
         string pattern = @"[^\d.]";
         Regex regex = new Regex(pattern);
 
+        string subPattern = @"[^-.0-9]";
+        Regex subRegex = new Regex(subPattern);
+
         if (i == 0) // start line
         {
             if (j == 0)
@@ -62,14 +70,14 @@ class Program
                 return regex.IsMatch(lines[i][j + 1].ToString()) ||
                     regex.IsMatch(lines[i + 1][j].ToString()) || regex.IsMatch(lines[i + 1][j + 1].ToString());
             }
-            else if (j == lines[i].Length - 1)
+            else if (j == lines[i].Length)
             {
-                return regex.IsMatch(lines[i][j - 1].ToString()) ||
+                return subRegex.IsMatch(lines[i][j - 1].ToString()) ||
                     regex.IsMatch(lines[i + 1][j - 1].ToString()) || regex.IsMatch(lines[i + 1][j].ToString());
             }
             else
             {
-                return regex.IsMatch(lines[i][j - 1].ToString()) || regex.IsMatch(lines[i][j + 1].ToString()) ||
+                return subRegex.IsMatch(lines[i][j - 1].ToString()) || regex.IsMatch(lines[i][j + 1].ToString()) ||
                     regex.IsMatch(lines[i + 1][j - 1].ToString()) || regex.IsMatch(lines[i + 1][j].ToString()) || regex.IsMatch(lines[i + 1][j + 1].ToString());
             }
         }
@@ -80,15 +88,15 @@ class Program
                 return regex.IsMatch(lines[i - 1][j].ToString()) || regex.IsMatch(lines[i - 1][j + 1].ToString()) ||
                     regex.IsMatch(lines[i][j + 1].ToString());
             }
-            else if (j == lines[i].Length-1)
+            else if (j == lines[i].Length)
             {
                 return regex.IsMatch(lines[i - 1][j - 1].ToString()) || regex.IsMatch(lines[i - 1][j].ToString()) ||
-                    regex.IsMatch(lines[i][j - 1].ToString());
+                    subRegex.IsMatch(lines[i][j - 1].ToString());
             }
             else
             {
                 return regex.IsMatch(lines[i - 1][j - 1].ToString()) || regex.IsMatch(lines[i - 1][j].ToString()) || regex.IsMatch(lines[i - 1][j + 1].ToString()) ||
-                    regex.IsMatch(lines[i][j - 1].ToString()) || regex.IsMatch(lines[i][j + 1].ToString());
+                    subRegex.IsMatch(lines[i][j - 1].ToString()) || regex.IsMatch(lines[i][j + 1].ToString());
             }
 
         }
@@ -100,16 +108,16 @@ class Program
                     regex.IsMatch(lines[i][j + 1].ToString()) ||
                     regex.IsMatch(lines[i + 1][j].ToString()) || regex.IsMatch(lines[i + 1][j + 1].ToString());
             }
-            else if (j == lines[i].Length-1)
+            else if (j == lines[i].Length)
             {
                 return regex.IsMatch(lines[i - 1][j - 1].ToString()) || regex.IsMatch(lines[i - 1][j].ToString()) ||
-                    regex.IsMatch(lines[i][j - 1].ToString()) ||
+                    subRegex.IsMatch(lines[i][j - 1].ToString()) ||
                     regex.IsMatch(lines[i + 1][j - 1].ToString()) || regex.IsMatch(lines[i + 1][j].ToString());
             }
             else
             {
                 return regex.IsMatch(lines[i - 1][j - 1].ToString()) || regex.IsMatch(lines[i - 1][j].ToString()) || regex.IsMatch(lines[i - 1][j + 1].ToString()) ||
-                    regex.IsMatch(lines[i][j - 1].ToString()) || regex.IsMatch(lines[i][j + 1].ToString()) ||
+                    subRegex.IsMatch(lines[i][j - 1].ToString()) || regex.IsMatch(lines[i][j + 1].ToString()) ||
                     regex.IsMatch(lines[i + 1][j - 1].ToString()) || regex.IsMatch(lines[i + 1][j].ToString()) || regex.IsMatch(lines[i + 1][j + 1].ToString());
             }
         }
